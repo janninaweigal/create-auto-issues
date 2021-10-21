@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 1000px;
+      }
+      .myDiv {
+        height: 60px;
+        border: 1px solid red;
+        margin: 10px auto;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- IntersectionObserver -->
+    <!-- <div id="div1">
+      <div id="div2">
+        <div class="myDiv">1</div>
+        <div class="myDiv">2</div>
+        <div class="myDiv">3</div>
+        <div class="myDiv">4</div>
+        <div class="myDiv">5</div>
+        <div class="myDiv">6</div>
+        <div class="myDiv">7</div>
+        <div class="myDiv">8</div>
+        <div class="myDiv">11</div>
+        <div class="myDiv">12</div>
+        <div class="myDiv">13</div>
+        <div class="myDiv">14</div>
+        <div class="myDiv">15</div>
+        <div class="myDiv">16</div>
+        <div class="myDiv">17</div>
+        <div class="myDiv">18</div>
+      </div>
+    </div> -->
+    <script src="手写代码题/实现一个节流函数.js"></script>
+    <script>
+      const count = 1000;
+      const frame = document.createDocumentFragment();
+      for (let i = 0; i < count; i++) {
+        const ele = document.createElement("div");
+        ele.innerHTML = `${i + 1}`;
+        frame.appendChild(ele);
+      }
+      document.body.appendChild(frame);
+
+      // 测试
+      function fn() {
+        console.log("节流");
+      }
+      addEventListener("scroll", throttle(fn, 1000));
+
+      // 性能更好的API
+      // IntersectionObserver是浏览器原生提供的构造函数，接受两个参数：callback是可见性变化时的回调函数，option是配置对象（该参数可选）。
+      // 开始观察observe    停止观察 unobserve   关闭观察器disconnect
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach((item, index) => {
+          if (item.isIntersecting) {
+            console.log(item.target);
+            item.target.style.opacity = 1;
+            observer.unobserve(item.target);
+          }
+        });
+      });
+
+      let newArr = Array.from(document.querySelectorAll("#div2 .myDiv"));
+      newArr.forEach((item) => observer.observe(item));
+    </script>
+  </body>
+</html>

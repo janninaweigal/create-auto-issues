@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现双向数据绑定</title>
+  </head>
+  <body>
+    <input id="input" />
+    <span id="span"></span>
+    <script>
+      let input = document.getElementById("input");
+      let span = document.getElementById("span");
+
+      // 数据劫持
+      let obj = {};
+      Object.defineProperty(obj, "text", {
+        get() {
+          return obj.text;
+        },
+        set(val) {
+          input.value = val;
+          span.innerHTML = val;
+        },
+      });
+
+      // 绑定事件
+      // input.onchange = function (e) {
+      //   obj.text = e.target.value;
+      // };
+
+      input.onkeyup = function (e) {
+        obj.text = e.target.value;
+      };
+    </script>
+  </body>
+</html>

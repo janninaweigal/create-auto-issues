@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ol>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+      <li><img src="./images/default.jpg" data="./images/404.png" /></li>
+    </ol>
+
+    <script>
+      // pageXOffset 和 pageYOffset 属性返回文档在窗口左上角水平和垂直方向滚动的像素。
+      // html => document.documentElement
+      // body => document.body
+      const imgs = document.querySelectorAll("img");
+      // 可视区域高度
+      const clientHeight =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
+      // 懒加载函数
+      function lazyLoad() {
+        // 滚动卷去的高度
+        let scrollTop =
+          window.pageYOffset ||
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+        // 判断
+        for (let i = 0, len = imgs.length; i < len; i++) {
+          // 卷去的高度（scrollTop） + 可视区域（clientHeight）> 图片可视区域冒出的高度
+          // 图片在可视区冒出的高度
+          const x = scrollTop + clientHeight - imgs[i].offsetTop;
+          // 图片在可视区域内
+          if (x > 0 && x < innerHeight + imgs[i].height) {
+            imgs[i].src = imgs[i].getAttribute("data");
+          }
+        }
+      }
+      // 添加事件
+      addEventListener("scroll", lazyLoad);
+    </script>
+  </body>
+</html>
