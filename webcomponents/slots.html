@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <template id="common">
+      <slot name="body">
+        默认的内容区域
+      </slot>
+    </template>
+    slot使用
+    <my-slot>
+      <slot slot="body">
+        这是改过的body
+      </slot>
+    </my-slot>
+    <script>
+
+      customElements.define('my-slot',
+        class extends HTMLElement {
+          constructor() {
+            super();
+            let template = document.getElementById('common');
+            let content = template.content;
+
+            const shadowRoot = this.attachShadow({mode: 'open'});
+           shadowRoot.appendChild(content.cloneNode(true));
+
+        }
+      })
+    </script>
+  </body>
+</html>
