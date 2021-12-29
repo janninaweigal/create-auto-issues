@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>渲染十万条数据</title>
+  </head>
+  <body>
+    <ul></ul>
+    <script>
+      const domNums = 100000;
+      // 一次处理
+      const group = 100;
+      // 处理的次数
+      const times = Math.floor(domNums / group);
+
+      let start = 0;
+      // 获取ul
+      const ulDom = document.querySelector("ul");
+      function add() {
+        const wrapper = document.createDocumentFragment();
+        for (let i = 0; i < group; i++) {
+          const dom = document.createElement("li");
+          dom.textContent = i;
+          wrapper.appendChild(dom);
+        }
+        ulDom.appendChild(wrapper);
+        start++;
+        loop();
+      }
+      function loop() {
+        if (start <= times) {
+          window.requestAnimationFrame(add);
+        }
+      }
+      loop();
+    </script>
+  </body>
+</html>

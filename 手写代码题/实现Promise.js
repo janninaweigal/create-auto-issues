@@ -5,6 +5,7 @@ class Promise {
     this.value = undefined
 
     // 成功的时候
+    // 注意this，箭头函数
     const resolve = (value) => {
       if (this.status == 'pending') {
         this.state = 'fulfilled'

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>获取input数量</title>
+  </head>
+  <body>
+    第一个input<input type="text" /><br />
+    第二个input<input type="text" /><br />
+    第三个input<input type="checkbox" /><br />
+    <script>
+      const domList = document.getElementsByTagName("input");
+      let len = domList.length;
+      const checkboxList = []
+      while (len-- > 0) {
+        if(domList[len].type == 'checkbox'){
+          checkboxList.push(domList[len])
+        }
+      }
+      console.log(checkboxList)
+    </script>
+  </body>
+</html>

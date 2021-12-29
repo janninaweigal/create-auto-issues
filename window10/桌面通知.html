@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">同意弹窗</button>
+  <script>
+
+var popNotice = function() {
+        if (Notification.permission == "granted") {
+            var notification = new Notification("Hi，", {
+                body: '可以加你为好友吗？',
+                icon: '/static/cute.gif'
+            });
+            
+            notification.onclick = function() {
+                alert('***已于' + new Date().toTimeString().split(' ')[0] + '加你为好友！');
+                notification.close();    
+            };
+        }    
+    };
+ 
+    document.getElementById('btn').onclick = function(){
+
+    if (window.Notification) {
+        if (Notification.permission == "granted") {
+            popNotice();
+        }else if( Notification.permission != "denied"){
+            Notification.requestPermission(function (permission) {
+              popNotice();
+            });
+        }
+    } else {
+        alert('浏览器不支持Notification');    
+    }
+    }
+
+  </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-
+// 思路：右边变量的原型存在左边变量的原型链上
 function instanceOf(left, right) {
   let leftVal = left.__proto__
   let rightVal = right.prototype

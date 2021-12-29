@@ -15,9 +15,9 @@ function fn() {
   console.log('防抖')
 }
 
-// const xx = debounce(fn, 1000)
-// xx()
-// xx()
-// xx()
-// xx()
+const xx = debounce(fn, 1000)
+xx()
+xx()
+xx()
+xx()
 // xx()

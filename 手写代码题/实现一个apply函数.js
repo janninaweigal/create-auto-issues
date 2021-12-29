@@ -4,6 +4,7 @@ Function.prototype.myapply = function (context) {
   }
   context = context || window;
   context.fn = this;
+  // 防止没有传 数组参数，报错
   const args = arguments[1]
   let result;
   if (args) {

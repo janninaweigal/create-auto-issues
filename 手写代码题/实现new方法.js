@@ -1,15 +1,14 @@
 // 实现new方法
-// return new constructor(arguments)
 function createNew() {
-  // 创建一个空对象
+  // 1. 创建一个空对象
   const obj = {}
   // 找出构造函数
   const constructor = [].shift.call(arguments)
-  // 原型链绑定(链接到原型)
+  // 2. 原型链绑定(链接到原型)
   obj.__proto__ = constructor.prototype
-  // 绑定 this
+  // 3. 绑定 this
   const result = constructor.apply(obj, arguments)
-  // 返回新对象
+  // 4. 返回新对象
   return typeof result == 'object' ? result : obj;
 }
 

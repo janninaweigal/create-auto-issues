@@ -58,4 +58,4 @@ let newObj = {
 // 使用new的情况
 const xx = obj.getName.mybind(newObj, '123')
 const result = new xx('love')
-console.log(result.constructor('3333'))
+// console.log(result.constructor('3333'))
